@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch } from 'react-redux';
-import { setUser } from '../Redux/UserSlice';
+import { useDispatch } from "react-redux";
+import { setUser } from "../Redux/UserSlice";
 import { useNavigate } from "react-router-dom";
 
 const users = [
@@ -11,21 +11,23 @@ const users = [
 
 const Login = () => {
   const dispatch = useDispatch();
-  const navigate=useNavigate();
-  const [username, setUsername] = useState('');
-  const [role, setRole] = useState('');
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState("");
+  const [role, setRole] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = () => {
-    const user = users.find(user => user.username === username && user.role === role);
+    const user = users.find(
+      (user) => user.username === username && user.role === role
+    );
 
     if (user) {
-      localStorage.setItem('userData', JSON.stringify(user));
+      localStorage.setItem("userData", JSON.stringify(user));
       dispatch(setUser(user));
-      console.log("User logged in:", user);
+      console.log("User logged in:", role, user);
       navigate(`/${role}`);
-   } else {
-      setError('Invalid username or password');
+    } else {
+      setError("Invalid username or password");
     }
   };
 
